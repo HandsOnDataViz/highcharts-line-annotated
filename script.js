@@ -1,4 +1,4 @@
-var TITLE = 'Air Transport, Passengers Carried (Canada)';
+var TITLE = 'Air Transport, Passengers Carried (1970–2018)';
 
 // Caption underneath the chart
 var CAPTION = 'Source: The World Bank'
@@ -9,13 +9,9 @@ CAPTION += '<br><a href="./data.csv" style="color: blue">Download dataset</a> po
 var X_AXIS = 'Year';  // x-axis label and label in tooltip
 var Y_AXIS = 'Passengers'; // y-axis label and label in tooltip
 
-var BEGIN_AT_ZERO = false;  // Should x-axis start from 0? `true` or `false`
+var BEGIN_AT_ZERO = true;  // Should y-axis start from 0? `true` or `false`
 
-var SHOW_GRID = true; // `true` to show the grid, `false` to hide
-var SHOW_LEGEND = false; // `true` to show the legend, `false` to hide
-
-var SERIES_NAME = 'Passengers Carried'
-var SERIES_COLOR = 'black'
+var SHOW_LEGEND = true; // `true` to show the legend, `false` to hide
 
 $(document).ready(function() {
 
@@ -23,9 +19,10 @@ $(document).ready(function() {
   $.get('./data.csv', function(csvString) {
 
     var data = Papa.parse(csvString).data;
+    var nSeries = data[0].length - 2
 
     var annotationPoints = data
-      .filter(function(x) {return x[2] !== ""})
+      .filter(function(x) {return x[nSeries+1] !== ""})
       .map(function(x) {
         return {
           point: {
@@ -34,9 +31,18 @@ $(document).ready(function() {
             x: x[0],
             y: x[1]
           },
-          text: x[2]
+          text: x[nSeries+1]
         }
       })
+
+    var series = []
+    for (var i = 1; i <= nSeries; i++) {
+      series.push({
+        data: data.map(function(x) { return [parseFloat(x[0]), parseFloat(x[i])] }),
+        name: data[0][i],
+        marker: { enabled: false },
+      })
+    }
 
     // Now create the chart
     Highcharts.chart('container', {
@@ -66,39 +72,18 @@ $(document).ready(function() {
 
       xAxis: {
         title: { text: X_AXIS },
-        labels: { format: '{value}' },
-        minRange: 0,
       },
 
       yAxis: {
         startOnTick: true,
-        endOnTick: false,
-        maxPadding: 0.35,
+        min: BEGIN_AT_ZERO ? 0 : null,
         title: { text: Y_AXIS },
         labels: { formatter: function(x) {return x.value.toLocaleString()} }
       },
 
-      tooltip: {
-          /*headerFormat: 'Distance: {point.x:.1f} km<br>',
-          pointFormat: '{point.y} m a. s. l.',
-          shared: true */
-      },
+      legend: { enabled: SHOW_LEGEND },
 
-      legend: {
-          enabled: SHOW_LEGEND
-      },
-
-      series: [{
-        data: data.map(function(x) {return [ parseFloat(x[0]), parseFloat(x[1])]}),
-        lineColor: SERIES_COLOR,
-        color: SERIES_COLOR,
-        fillOpacity: 0.5,
-        name: SERIES_NAME,
-        marker: {
-            enabled: false
-        },
-        threshold: null
-      }]
+      series: series,
 
     });
 
