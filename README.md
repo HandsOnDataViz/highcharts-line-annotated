@@ -2,6 +2,14 @@
 
 ![Annotated line chart](./annotated-line-example.png)
 
+## Demo
+https://handsondataviz.github.io/highcharts-line-annotated/
+
+Sample data from the World Bank, https://databank.worldbank.org/source/world-development-indicators
+
+## Create your own 
+See chapter 10: Chartjs and Highcharts templates in [Hands-On Data Visualization](https://handsondataviz.org) by Jack Dougherty and Ilya Ilyankou
+
 In `data.csv`, each row is a point in time (x-axis). First column are x-axis values,
 second and all other columns except the last one column are y-axis values.
 The final column contains annotations.
@@ -29,5 +37,3 @@ var SHOW_LEGEND = true; // `true` to show the legend, `false` to hide
 
 ## See also
 See **Chart.js Code Templates** on GitHub: https://github.com/HandsOnDataViz/chartjs-templates
-
-Example data from the World Bank, https://databank.worldbank.org/source/world-development-indicators
