@@ -4,7 +4,9 @@ var TITLE = 'Air Transport, Passengers Carried (1970–2018)';
 var CAPTION = 'Source: The World Bank'
 
 // Add download link to the caption
-CAPTION += '<br><a href="./data.csv" style="color: blue">Download dataset</a> powering this visualization';
+CAPTION += '<br><a href="https://github.com/HandsOnDataViz/highcharts-line-annotated" style="color:blue">View data and code</a>, \
+created by <a href="https://handsondataviz.org/" style="color: blue">HandsOnDataViz</a> \
+with <a href="https://www.highcharts.com/" style="color: blue">Highcharts</a>';
 
 var X_AXIS = 'Year';  // x-axis label and label in tooltip
 var Y_AXIS = 'Passengers'; // y-axis label and label in tooltip
