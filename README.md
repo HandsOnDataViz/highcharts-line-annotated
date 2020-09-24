@@ -22,19 +22,19 @@ In `script.js`, you can customize the values of variables shown in the code snip
 var TITLE = 'Air Transport, Passengers Carried (1970–2018)';
 
 // Caption underneath the chart
-var CAPTION = 'Source: The World Bank'
+var CAPTION = 'Source: The World Bank';
 
-// Add download link to the caption
-CAPTION += '<br><a href="https://github.com/HandsOnDataViz/highcharts-line-annotated" style="color:blue">View data and code</a>, \
-created by <a href="https://handsondataviz.org/" style="color: blue">HandsOnDataViz</a> \
-with <a href="https://www.highcharts.com/" style="color: blue">Highcharts</a>';
+// x-axis label and label in tooltip
+var X_AXIS = 'Year';
 
-var X_AXIS = 'Year';  // x-axis label and label in tooltip
-var Y_AXIS = 'Passengers'; // y-axis label and label in tooltip
+// y-axis label and label in tooltip
+var Y_AXIS = 'Passengers';
 
-var BEGIN_AT_ZERO = true;  // Should y-axis start from 0? `true` or `false`
+// Should y-axis start from 0? `true` or `false`
+var BEGIN_AT_ZERO = true;
 
-var SHOW_LEGEND = true; // `true` to show the legend, `false` to hide
+// `true` to show the legend, `false` to hide
+var SHOW_LEGEND = true;
 ```
 
 ## Why am I not seeing my chart when I open `index.html` in the browser?
